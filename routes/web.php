@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes();
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/logout', 'Auth\LoginController@logout');
+
+// Projects
+Route::get('/projects', 'ProjectController@index')->name('projects');
+Route::post('/projects', 'ProjectController@store')->name('projects.store');

@@ -1,0 +1,27 @@
+.parsley-errors-list {
+    margin: 0;
+    padding: 0;
+}
+.parsley-errors-list > li {
+    font-size: 12px;
+    list-style: none;
+    color: #f96a74;
+    margin-top: 5px;
+    padding-left: 20px;
+    font-weight: 600;
+    position: relative;
+}
+.parsley-errors-list > li:before {
+    content: "\F159";
+    font: normal normal normal 14px/1 "Material Design Icons";
+    position: absolute;
+    left: 2px;
+    top: 2px;
+}
+
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+    color: #f96a74;
+    border: 1px solid #f96a74;
+}
