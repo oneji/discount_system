@@ -103,12 +103,26 @@
                     <nav id="sidenav" class="sidenav-collapse collapse">
                         <ul class="sidenav level-1">
                             <li class="sidenav-heading">Меню</li>
-                            <li class="sidenav-item">
-                                <a href="{{ route('projects') }}">
-                                    <span class="sidenav-icon icon icon-building"></span>
-                                    <span class="sidenav-label">Проекты</span>
-                                </a>
-                            </li>
+                            @role('superadministrator|administrator')
+                                <li class="{{ isset($projectsActive) ? 'sidenav-item active' : 'sidenav-item' }}">
+                                    <a href="{{ route('projects') }}">
+                                        <span class="sidenav-icon icon icon-building"></span>
+                                        <span class="sidenav-label">Проекты</span>
+                                    </a>                                
+                                </li>
+                                <li class="{{ isset($packagesActive) ? 'sidenav-item active' : 'sidenav-item' }}">
+                                    <a href="{{ route('packages') }}">
+                                        <span class="sidenav-icon icon icon-shopping-basket"></span>
+                                        <span class="sidenav-label">Пакеты скидок</span>
+                                    </a>                           
+                                </li>
+                                <li class="{{ isset($employeesActive) ? 'sidenav-item active' : 'sidenav-item' }}">
+                                    <a href="{{ route('employees') }}">
+                                        <span class="sidenav-icon icon icon-users"></span>
+                                        <span class="sidenav-label">Сотрудники</span>
+                                    </a>                           
+                                </li>
+                            @endrole
                         </ul>
                     </nav>
                 </div>

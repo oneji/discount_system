@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main', [ 'projectsActive' => true ])
 
 @section('stylesheets')
     <link rel="stylesheet" href="{{ asset('plugins/dropify/dist/css/dropify.css') }}">
@@ -79,13 +79,13 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     {{ Form::label('project_name', 'Название проекта', [ 'class' => 'control-label' ]) }}
-                                    {{ Form::text('project_name', '', [ 'class' => 'form-control', 'required' => 'required', 'spellcheck' => false, 'data-msg-required' => 'Введите название проекта.' ]) }}
+                                    {{ Form::text('project_name', '', [ 'class' => 'form-control', 'required' => 'required', 'spellcheck' => false, 'data-msg-required' => 'Введите название проекта.', 'placeholder' => 'Введите название проекта.' ]) }}
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     {{ Form::label('project_address', 'Адрес проекта', [ 'class' => 'control-label' ]) }}
-                                    {{ Form::text('project_address', '', [ 'class' => 'form-control', 'spellcheck' => false ]) }}
+                                    {{ Form::text('project_address', '', [ 'class' => 'form-control', 'spellcheck' => false,  'placeholder' => 'Введите адрес проекта.'  ]) }}
                                 </div>
                             </div>
                         </div>
@@ -93,29 +93,29 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     {{ Form::label('project_contact', 'Контакт проекта', [ 'class' => 'control-label' ]) }}
-                                    {{ Form::text('project_contact', '', [ 'class' => 'form-control', 'spellcheck' => false ]) }}
+                                    {{ Form::text('project_contact', '', [ 'class' => 'form-control', 'spellcheck' => false, 'placeholder' => 'Введите контакт проекта.'  ]) }}
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                     <div class="form-group">
-                                        {{ Form::label('projec_max_discount', 'Максимальный процент скидки', [ 'class' => 'control-label' ]) }}
+                                        {{ Form::label('project_max_discount', 'Максимальный процент скидки', [ 'class' => 'control-label' ]) }}
                                         <div class="input-group">
                                             <span class="input-group-addon">%</span>
-                                            {{ Form::text('projec_max_discount', '', [ 'class' => 'form-control', 'required' => 'required', 'data-msg-required' => 'Введите процент.' ]) }}
+                                            {{ Form::text('project_max_discount', '', [ 'class' => 'form-control', 'required' => 'required', 'data-msg-required' => 'Введите процент.',  'placeholder' => 'Введите процент.'  ]) }}
                                         </div>
                                     </div>
                                 </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     {{ Form::label('project_description', 'Описание проекта', [ 'class' => 'control-label' ]) }}
-                                    {{ Form::textarea('project_description', '', [ 'class' => 'form-control', 'spellcheck' => false, 'rows' => 4 ]) }}
+                                    {{ Form::textarea('project_description', '', [ 'class' => 'form-control', 'spellcheck' => false, 'rows' => 4, 'placeholder' => 'Введите описание проекта.'  ]) }}
                                 </div>
                             </div>
                         </div>
                         <div class="row gutter-xs">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    {{ Form::label('projec_logo', 'Логотип проекта', [ 'class' => 'control-label' ]) }}
+                                    {{ Form::label('project_logo', 'Логотип проекта', [ 'class' => 'control-label' ]) }}
                                     {{ Form::file('project_logo', [ 'class' => 'dropify', 'data-max-filesize' => '1M', 'data-height' => '100' ]) }}
                                 </div>
                             </div>
