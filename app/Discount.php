@@ -28,6 +28,6 @@ class Discount extends Model
      */
     public function project()
     {
-        return $this->belongsTo('App\Discount');
+        return $this->belongsTo('App\Project');
     }
 }

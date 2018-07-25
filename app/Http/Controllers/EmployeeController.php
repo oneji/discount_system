@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Employee;
 use App\DiscountPackage;
+use App\Project;
 use Illuminate\Http\Request;
 use Session;
 use Carbon\Carbon;
@@ -18,8 +19,8 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::select('employees.*', 'package_name')
-                                ->join('discount_packages', 'discount_packages.id', '=', 'employees.discount_package_id')
-                                ->get();
+                                ->leftJoin('discount_packages', 'discount_packages.id', '=', 'employees.discount_package_id')
+                                ->with('discounts')->get();
 
         return view('pages.employees.index')->with('employees', $employees);
     }
@@ -31,8 +32,12 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $packages = DiscountPackage::all()->pluck('package_name', 'id');
-        return view('pages.employees.create')->with('packages', $packages);
+        $packages = DiscountPackage::all();
+        $projects = Project::all();
+        return view('pages.employees.create')->with([
+            'packages' => $packages,
+            'projects' => $projects
+        ]);
     }
 
     /**
@@ -63,9 +68,18 @@ class EmployeeController extends Controller
             $employee->work_start_date = Carbon::parse($request->work_start_date);        
 
         $employee->save();
+
+        if($employee->discount_package_id === null) {
+            $discounts = array();
+            foreach($request->discount_amounts as $projectId => $amount) {
+                $employee->discounts()->attach($projectId, [
+                    'discount_amount' => $amount
+                ]);
+            }
+        }
         
         Session::flash('employees.created', 'Сотрудник успешно создан.');
-        return redirect()->route('employees');
+        return redirect()->route('employees.index');
     }
 
     /**

@@ -48,7 +48,7 @@
                                     </td>
                                     <td>{{ $employee->fullname }}</td>
                                     <td>{{ $employee->card_number }}</td>
-                                    <td>{{ $employee->package_name }}</td>
+                                    <td>{{ $employee->package_name !== null ? $employee->package_name : 'Кастомный' }}</td>
                                     <td>{{ $employee->project_name }}</td>
                                     <td>{{ $employee->occupation }}</td>
                                     <td>

@@ -22,8 +22,9 @@ class DiscountPackageController extends Controller
                 $query->select('discounts.*', 'project_name', 'project_logo')
                     ->join('projects', 'projects.id', '=', 'discounts.project_id')
                     ->get();
-            }
-        ])->get();        
+            }, 'employees'
+        ])->get();       
+        
         return view('pages.packages.index')->with([ 'packages' => $packages ]);
     }
 
@@ -62,7 +63,7 @@ class DiscountPackageController extends Controller
         $package->load('discounts');
 
         Session::flash('packages.created', 'Пакет скидок успешно создан.');
-        return redirect()->route('packages');
+        return redirect()->route('packages.index');
     }
 
     /**
@@ -123,7 +124,7 @@ class DiscountPackageController extends Controller
         $package->discounts()->saveMany($discounts);
 
         Session::flash('packages.updated', 'Пакет скидок успешно изменен.');
-        return redirect()->route('packages');
+        return redirect()->route('packages.index');
     }
 
     /**

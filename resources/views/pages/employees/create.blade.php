@@ -2,6 +2,11 @@
 
 @section('stylesheets')
     <link rel="stylesheet" href="{{ asset('plugins/dropify/dist/css/dropify.css') }}">
+    <style>
+        .projects-list {
+            display: none;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -10,6 +15,7 @@
             <div class="card">
                 <div class="card-body">
                     {!! Form::open([ 'url' => route('employees.store'), 'method' => 'POST', 'data-toggle' => 'validator', 'enctype' => 'multipart/form-data' ]) !!}
+                        {{-- Photo, fullname, card number and birthday --}}
                         <div class="row gutter-xs">
                             <div class="col-sm-3">
                                 <div class="form-group">
@@ -43,6 +49,7 @@
                                 </div>
                             </div>
                         </div> 
+                        {{-- Gender and address --}}
                         <div class="row gutter-xs">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -57,6 +64,7 @@
                                 </div>
                             </div>
                         </div>
+                        {{-- Phone and email --}}
                         <div class="row gutter-xs">                            
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -71,6 +79,7 @@
                                 </div>
                             </div>
                         </div>                
+                        {{-- Project and occupation --}}
                         <div class="row gutter-xs">                            
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -84,7 +93,8 @@
                                         {{ Form::text('occupation', '', [ 'class' => 'form-control', 'spellcheck' => false, 'placeholder' => 'Введите должность', 'required' => 'required', 'data-msg-required' => 'Введите должность.' ]) }}
                                     </div>
                                 </div>
-                        </div>                
+                        </div>    
+                        {{-- Work start date and discount package --}}
                         <div class="row gutter-xs">                            
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -98,10 +108,18 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     {{ Form::label('discount_package_id', 'Пакет скидок', [ 'class' => 'control-label' ]) }}
-                                    {{ Form::select('discount_package_id', $packages, null, [ 'class' => 'form-control', 'placeholder' => 'Выберите пакет' ]) }}
+                                    {{-- {{ Form::select('discount_package_id', $packages, null, [ 'class' => 'form-control', 'placeholder' => 'Выберите пакет' ]) }} --}}
+                                    <select name="discount_package_id" class="form-control" id="discount_package_id">
+                                        <option disabled selected>Выберите пакет</option>
+                                        <option value="">Кастомный</option>
+                                        @foreach($packages as $package)
+                                            <option value="{{ $package->id }}">{{ $package->package_name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
+                        {{-- Status --}}
                         <div class="row gutter-xs">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -118,6 +136,27 @@
                                 </div>
                             </div>
                         </div> 
+                        <div class="projects-list">
+                            <div class="divider">
+                                <div class="divider-content">Компании</div>
+                            </div>
+                            @foreach($projects as $project)
+                                <div class="row gutter-xs">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            {{ Form::label('project_name', $project->project_name, [ 'class' => 'col-sm-3 col-md-3 control-label' ]) }}
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="slider slider-circle" data-slider="primary" data-step="1" data-tooltips="true" data-max="{{ $project->project_max_discount }}" data-start="1" data-target="{{ '#slider-target-'.$project->id }}"></div>                                        
+                                            </div>
+                                            <div class="col-sm-6 col-md-3">
+                                                {{ Form::text('discount_amounts['.$project->id.']', '', [ 'id' => 'slider-target-'.$project->id, 'class' => 'form-control' ]) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                            @endforeach
+                            <hr>
+                        </div>
                         {{ Form::button('Добавить', [ 'class' => 'btn btn-outline-primary btn-block', 'type' => 'submit' ]) }}
                     {!! Form::close() !!}
                 </div>
@@ -128,16 +167,5 @@
 
 @section('scripts')
     <script src="{{ asset('plugins/dropify/dist/js/dropify.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('.dropify').dropify({
-                messages: {
-                    'default': 'Перетащите файл сюда или кликните',
-                    'replace': 'Перетащите файл сюда или кликните для замены',
-                    'remove':  'Удалить',
-                    'error':   'Упс, что то пошло не так.'
-                }
-            });
-        });
-    </script>
+    <script src="{{ asset('js/employees.js') }}"></script>
 @endsection

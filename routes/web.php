@@ -21,16 +21,18 @@ Route::group(['middleware' => ['role:superadministrator|administrator']], functi
     Route::get('/projects', 'ProjectController@index')->name('projects');
     Route::post('/projects', 'ProjectController@store')->name('projects.store');
     // Packages
-    Route::get('/packages', 'DiscountPackageController@index')->name('packages');
-    Route::get('/packages/create', 'DiscountPackageController@create')->name('packages.create');
-    Route::get('/packages/{package}/edit', 'DiscountPackageController@edit')->name('packages.edit');
-
-    Route::post('/packages', 'DiscountPackageController@store')->name('packages.store');
-    Route::put('/packages/{package}', 'DiscountPackageController@update')->name('packages.update');
+    Route::resource('/packages', 'DiscountPackageController', [
+        'except' => [ 'show', 'destroy' ]
+    ]);
     // Employees
-    Route::get('/employees', 'EmployeeController@index')->name('employees');
+    Route::get('/employees', 'EmployeeController@index')->name('employees.index');
     Route::get('/employees/create', 'EmployeeController@create')->name('employees.create');
 
     Route::post('/employees', 'EmployeeController@store')->name('employees.store');
 });
+
+Route::get('/sales', 'SaleController@index')->name('sales.index');
+Route::get('/sales/create', 'SaleController@create')->name('sales.create');
+Route::post('/sales/check-card', 'SaleController@checkCard')->name('sales.check');
+Route::post('/sales', 'SaleController@store')->name('sales.store');
 

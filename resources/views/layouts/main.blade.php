@@ -111,15 +111,23 @@
                                     </a>                                
                                 </li>
                                 <li class="{{ isset($packagesActive) ? 'sidenav-item active' : 'sidenav-item' }}">
-                                    <a href="{{ route('packages') }}">
+                                    <a href="{{ route('packages.index') }}">
                                         <span class="sidenav-icon icon icon-shopping-basket"></span>
                                         <span class="sidenav-label">Пакеты скидок</span>
                                     </a>                           
                                 </li>
                                 <li class="{{ isset($employeesActive) ? 'sidenav-item active' : 'sidenav-item' }}">
-                                    <a href="{{ route('employees') }}">
+                                    <a href="{{ route('employees.index') }}">
                                         <span class="sidenav-icon icon icon-users"></span>
                                         <span class="sidenav-label">Сотрудники</span>
+                                    </a>                           
+                                </li>
+                            @endrole
+                            @role('operator')
+                                <li class="{{ isset($salesActive) ? 'sidenav-item active' : 'sidenav-item' }}">
+                                    <a href="{{ route('sales.index') }}">
+                                        <span class="sidenav-icon icon icon-list-alt"></span>
+                                        <span class="sidenav-label">Продажи</span>
                                     </a>                           
                                 </li>
                             @endrole

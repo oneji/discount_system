@@ -22,4 +22,12 @@ class DiscountPackage extends Model
     {
         return $this->hasMany('App\Discount');
     }
+
+    /**
+     * Get all employees that have a discount package.
+     */
+    public function employees()
+    {
+        return $this->hasMany('App\Employee');
+    }
 }

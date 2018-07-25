@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia\Dushanbe',
 
     /*
     |--------------------------------------------------------------------------
@@ -182,6 +182,7 @@ return [
          */
         Laratrust\LaratrustServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
@@ -238,6 +239,7 @@ return [
         'Laratrust'   => Laratrust\LaratrustFacade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 
