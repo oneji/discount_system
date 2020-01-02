@@ -107,10 +107,6 @@ class SaleController extends Controller
         $sale->sale_date = Carbon::now();
         $sale->save();
 
-        $projectName = $saleData[0]['employee']->discounts[0]->project_name;
-        $txt = 'Vami%20sovershena%20pokupka%20na%20summu%20'.$sale->discount_sum.'%20TJS%20so%20skidkoy%20'.$sale->discount_amount.'%25%20v%20'.$projectName.'.';        
-        $this->sendSMS($saleData[0]['employee']->phone, $txt);
-
         Session::flash('sales.created', 'Продажа успешно оформлена.');
         return redirect()->route('sales.index');
     }
@@ -121,23 +117,5 @@ class SaleController extends Controller
     private function getPercentage($number, $percent) 
     {
         return (int) $number * ( (int) $percent / 100 );
-    }
-
-    /**
-     * Helper function. Send sms after successfull sale.
-     */
-    public function sendSMS($phone, $text)
-    {
-        $user = 'info@social.tj';
-        $key = 'info@social.tj_info@social.tj';
-        $token = md5($key.$user.$phone);
-        $url = 'http://sms.55soft.net/api/sendsms?user='.$user.'&phone='.$phone.'&msg='.$text.'&token='.$token;
-
-        $curl = curl_init($url);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		$result = curl_exec($curl);
-        curl_close($curl);
-        
-        return $result;
     }
 }
