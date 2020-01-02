@@ -63,22 +63,8 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="contacts.html">Contacts</a></li>
-                                <li><a href="profile.html">Profile</a></li>
                                 <li><a href="{{ route('logout') }}">Выйти</a></li>
                             </ul>
-                        </li>
-                        <li class="visible-xs-block">
-                            <a href="contacts.html">
-                                <span class="icon icon-users icon-lg icon-fw"></span>
-                                Contacts
-                            </a>
-                        </li>
-                        <li class="visible-xs-block">
-                            <a href="profile.html">
-                                <span class="icon icon-user icon-lg icon-fw"></span>
-                                Profile
-                            </a>
                         </li>
                         <li class="visible-xs-block">
                             <a href="login-1.html">
@@ -123,14 +109,14 @@
                                     </a>                           
                                 </li>
                             @endrole
-                            @role('operator')
+                            {{-- @role('operator') --}}
                                 <li class="{{ isset($salesActive) ? 'sidenav-item active' : 'sidenav-item' }}">
                                     <a href="{{ route('sales.index') }}">
                                         <span class="sidenav-icon icon icon-list-alt"></span>
                                         <span class="sidenav-label">Продажи</span>
                                     </a>                           
                                 </li>
-                            @endrole
+                            {{-- @endrole --}}
                         </ul>
                     </nav>
                 </div>
