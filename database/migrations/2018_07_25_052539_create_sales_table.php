@@ -24,6 +24,10 @@ class CreateSalesTable extends Migration
             $table->integer('discount_sum');
             $table->dateTime('sale_date');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('employee_id')->references('id')->on('employees');
         });
     }
 

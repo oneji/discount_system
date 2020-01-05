@@ -8,10 +8,7 @@
                     {!! Form::open([ 'url' => route('packages.update', $package->id), 'method' => 'PUT', 'data-toggle' => 'validator', 'class' => 'form form-horizontal' ]) !!}
                         <div class="row gutter-xs">
                             <div class="col-sm-12">
-                                {{ Form::label('package_name', 'Название пакета', [ 'class' => 'col-sm-3 col-md-3 control-label' ]) }}
-                                <div class="col-sm-6 col-md-6">
-                                    {{ Form::text('package_name', $package->package_name, [ 'class' => 'form-control', 'required' => 'required', 'spellcheck' => false, 'data-msg-required' => 'Введите название пакета.', 'placeholder' => 'Введите название проекта' ]) }}
-                                </div>
+                                {{ Form::text('package_name', $package->package_name, [ 'class' => 'form-control', 'required' => 'required', 'spellcheck' => false, 'data-msg-required' => 'Введите название пакета.', 'placeholder' => 'Название пакета' ]) }}
                             </div>
                         </div>
                         <hr>
@@ -30,7 +27,7 @@
                                 </div>
                             </div>  
                         @endforeach                   
-                        {{ Form::button('Добавить', [ 'class' => 'btn btn-outline-primary btn-block', 'type' => 'submit' ]) }}
+                        {{ Form::button('Сохранить', [ 'class' => 'btn btn-outline-primary btn-block', 'type' => 'submit' ]) }}
                     {!! Form::close() !!}
                 </div>
             </div>

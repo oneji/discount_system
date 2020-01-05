@@ -84,7 +84,12 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     {{ Form::label('project_name', 'Проект', [ 'class' => 'control-label' ]) }}
-                                    {{ Form::text('project_name', '', [ 'class' => 'form-control', 'spellcheck' => false, 'placeholder' => 'Введите проект', 'required' => 'required', 'data-msg-required' => 'Введите проект.' ]) }}
+                                    <select name="project_id" class="form-control" id="project_id" data-msg-required = "Введите проект." required>
+                                        <option disabled selected>Выберите проект</option>
+                                        @foreach($projects as $project)
+                                            <option value="{{ $project->id }}">{{ $project->project_name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -108,7 +113,6 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     {{ Form::label('discount_package_id', 'Пакет скидок', [ 'class' => 'control-label' ]) }}
-                                    {{-- {{ Form::select('discount_package_id', $packages, null, [ 'class' => 'form-control', 'placeholder' => 'Выберите пакет' ]) }} --}}
                                     <select name="discount_package_id" class="form-control" id="discount_package_id">
                                         <option disabled selected>Выберите пакет</option>
                                         <option value="">Кастомный</option>

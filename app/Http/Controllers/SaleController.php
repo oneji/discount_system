@@ -19,11 +19,7 @@ class SaleController extends Controller
     public function index()
     {
         Session::forget('saleData');
-        $sales = Sale::select('sales.*', 'users.fullname as username', 'projects.project_name', 'employees.fullname as employee_name', 'employees.card_number')
-                        ->join('users', 'users.id', '=', 'sales.user_id')
-                        ->join('projects', 'projects.id', '=', 'sales.project_id')
-                        ->join('employees', 'employees.id', '=', 'sales.employee_id')
-                        ->get();
+        $sales = Sale::getAll();
 
         return view('pages.sales.index')->with('sales', $sales);
     }
@@ -96,6 +92,7 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         $saleData = Session::get('saleData');
+        // return $saleData[0];
         $sale = new Sale();
         $sale->user_id = Auth::user()->id;
         $sale->project_id = Auth::user()->project_id;

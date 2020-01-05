@@ -12,8 +12,8 @@ class Employee extends Model
      * @var array
      */
     protected $fillable = [
-        'fullname', 'card_number', 'gender', 'address', 
-        'phone', 'email', 'project_name', 'occupation', 'discount_package_id', 'active'
+        'fullname', 'card_number', 'gender', 'address',
+        'phone', 'email', 'project_id', 'occupation', 'discount_package_id', 'active'
     ];
 
     /**
@@ -30,5 +30,13 @@ class Employee extends Model
     public function discount_package()
     {
         return $this->belongsTo('App\DiscountPackage');
+    }
+
+    /**
+     * Get the sales for the employee.
+     */
+    public function sales()
+    {
+        return $this->hasMany('App\Sale');
     }
 }

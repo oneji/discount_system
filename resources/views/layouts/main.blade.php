@@ -89,6 +89,12 @@
                     <nav id="sidenav" class="sidenav-collapse collapse">
                         <ul class="sidenav level-1">
                             <li class="sidenav-heading">Меню</li>
+                            <li class="{{ Route::currentRouteName() === 'home' ? 'sidenav-item active' : 'sidenav-item' }}">
+                                <a href="{{ route('home') }}">
+                                    <span class="sidenav-icon icon icon-home"></span>
+                                    <span class="sidenav-label">Главная</span>
+                                </a>                                
+                            </li>
                             @role('superadministrator|administrator')
                                 <li class="{{ isset($projectsActive) ? 'sidenav-item active' : 'sidenav-item' }}">
                                     <a href="{{ route('projects') }}">

@@ -22,7 +22,7 @@ class CreateEmployeesTable extends Migration
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-            $table->string('project_name')->nullable();
+            $table->integer('project_id')->unsigned();
             $table->string('occupation')->nullable();
             $table->date('work_start_date')->nullable();
             $table->integer('discount_package_id')->unsigned()->nullable();
@@ -31,6 +31,7 @@ class CreateEmployeesTable extends Migration
             $table->timestamps();
 
             $table->foreign('discount_package_id')->references('id')->on('discount_packages');
+            $table->foreign('project_id')->references('id')->on('projects');
         });
     }
 

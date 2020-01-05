@@ -18,8 +18,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::select('employees.*', 'package_name')
+        $employees = Employee::select('employees.*', 'package_name', 'project_name')
                                 ->leftJoin('discount_packages', 'discount_packages.id', '=', 'employees.discount_package_id')
+                                ->join('projects', 'projects.id', '=', 'employees.project_id')
                                 ->with('discounts')->get();
 
         return view('pages.employees.index')->with('employees', $employees);
@@ -34,6 +35,7 @@ class EmployeeController extends Controller
     {
         $packages = DiscountPackage::all();
         $projects = Project::all();
+
         return view('pages.employees.create')->with([
             'packages' => $packages,
             'projects' => $projects
